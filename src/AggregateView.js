@@ -4,6 +4,7 @@ import DetailView from './DetailView';
 import RangeSlider from './RangeSlider';
 import Checkbox from './Checkbox';
 import races from './jsCommon/races';
+import filterByRange from './utils/filterByRange';
 
 class AggregateView extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class AggregateView extends React.Component {
             },
             active: {},
             subject: 'Math',
+            score_range: [-Number.MAX_VALUE, Number.MAX_VALUE]
         }
     
     };
@@ -27,9 +29,10 @@ class AggregateView extends React.Component {
         let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
         res = await res.json();
         this.setState({
-            scores: res.scores,
+            scores: filterByRange(res.scores, this.state.score_range),
             schools: res.schools,
-            allScores: res.scores
+            allScores: res.scores,
+            subject,
         });
     }
     componentWillMount() {
@@ -46,7 +49,6 @@ class AggregateView extends React.Component {
         let asian = +this.state.allScores.asian[index].x;
         let hispanic = +this.state.allScores.hispanic[index].x;
         let score = props.payload[0].payload.y;
-
         return {
                 school,
                 black,

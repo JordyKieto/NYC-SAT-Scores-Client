@@ -1,7 +1,6 @@
 import React from 'react';
 class Checkbox extends React.Component {
     handleChange(event){
-        // console.log(Object.keys(event));
         this.props.getScores(event.target.value)
     };
     render() {

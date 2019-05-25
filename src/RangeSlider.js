@@ -1,20 +1,17 @@
 import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import filterByRange from './utils/filterByRange';
 
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
-// const Handle = Slider.Handle;
-
-
 
 class RangeSlider extends React.Component{
-    handle([lesserOrEqual, greaterOrEqual]) {
-        let newScores = {}
-        for (let race in this.props.scores){
-                newScores[race] = this.props.scores[race].filter(({y})=>{ return y <= greaterOrEqual && y >= lesserOrEqual})
-        }
-        this.props.setAggState({scores: newScores})
+    handle(score_range) {
+        this.props.setAggState({
+                                scores: filterByRange(this.props.scores, score_range),
+                                score_range,
+        });
     };
     render(){
         return (
