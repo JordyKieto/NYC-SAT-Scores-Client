@@ -24,7 +24,7 @@ class AggregateView extends React.Component {
     
     };
     async getScores(subject){
-        let res = await fetch(`scores?subject=${subject}`);
+        let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
         res = await res.json();
         this.setState({
             scores: res.scores,
