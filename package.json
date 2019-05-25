@@ -11,6 +11,10 @@
     "rc-tooltip": "^3.7.3",
     "recharts": "^1.6.2"
   },
+  "engines": {
+    "node": "10.15.3",
+    "npm": "6.4.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
