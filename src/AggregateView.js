@@ -4,13 +4,14 @@ import DetailView from './DetailView';
 import RangeSlider from './RangeSlider';
 import Checkbox from './Checkbox';
 import races from './jsCommon/races';
+const BinarySearchTree = require('binary-search-tree').BinarySearchTree;
 
 class AggregateView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             allScores: {},
-            scores: {},
+            scores: {'black': [], 'asian':[], 'white':[], 'hispanic':[]},
             schools: [],
             show: {
                 black: true,
@@ -24,8 +25,15 @@ class AggregateView extends React.Component {
     
     };
     async getScores(subject){
-        let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
+        let res = await fetch(`${'https://nyc-sat-scores-server.herokuapp.com/'}scores?subject=${subject}`);
         res = await res.json();
+        for(let race in res.scores){
+            let bst = new BinarySearchTree();
+            res.scores[race].forEach((e)=>{
+                bst.insert(e.y, e);
+            })
+            res.scores[race] = bst;
+        }
         this.setState({
             scores: res.scores,
             schools: res.schools,
@@ -95,7 +103,7 @@ class AggregateView extends React.Component {
                     <Scatter
                         key={race}
                         name={race} 
-                        data={this.state.scores[race]} 
+                        data={this.state.scores[race] && this.state.scores[race].betweenBounds? this.state.scores[race].betweenBounds({ $gte: 0}): []} 
                         fill={color}
                         className={this.state.show[race]? "": "hidden"} 
                         shape={<Dot r={5}/>}>
