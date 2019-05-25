@@ -48,8 +48,8 @@
 }
 .inner-pie {
   position: relative;
-  top: -370px;
-  left: 200px;
+  top: -270px;
+  left: 100px;
 }
 #root{
   height: 654px;
@@ -64,8 +64,7 @@ customToolTip{
   top: -890px;
   left: 752px;
 }
-.recharts-legend-wrapper {
+.inner-bar {
   position: relative;
-  right: 11px;
-  margin-left: 85px;
+  top: 200px;
 }

@@ -22,9 +22,12 @@
     >REACT_APP_SAT_PROXY=http://localhost:5000/ npm start
 
 ## Technologies Used
+* Javascript / NodeJS
+* Python
 * Pandas 
 * Flask
-* React / Redux
+* React
+* Recharts
 
 ## Future Updates
 * Detail View should display demographic pie chart initially

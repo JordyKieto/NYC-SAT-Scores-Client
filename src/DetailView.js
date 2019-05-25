@@ -1,17 +1,11 @@
 import {
-    BarChart, 
-    Bar, 
-    XAxis, 
-    YAxis, 
-    CartesianGrid, 
-    Tooltip, 
-    Legend, 
     PieChart, 
     Pie, 
     Cell,
 } from 'recharts';
 import React from 'react';
 import races from './jsCommon/races';
+import SubjectView from './SubjectView';
 
 class DetailView extends React.Component {
     constructor(props) {
@@ -23,8 +17,7 @@ class DetailView extends React.Component {
     componentWillReceiveProps(nextProps){
         this.propsToState(nextProps);
     };
-    propsToState(props){
-        let {active} = props;
+    propsToState({active}){
         this.setState({
             active: [{
                 black: active.score * (active.black / 100),
@@ -50,32 +43,14 @@ class DetailView extends React.Component {
     render() {
         return (
             <>
-                <BarChart
-                    width={400}
-                    height={275}
-                    data={this.state.active}
-                    margin={{
-                        top:20, right: 30, left: 20, bottom: 5
-                    }}
-                >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis/>
-                    <YAxis domain={[0, 800]}/>
-                    <Tooltip/>
-                    <Legend/>
-                    <Bar dataKey="black" stackId="a" fill="#d8cb84"/>
-                    <Bar dataKey="white" stackId="a" fill="#d884cb"/>
-                    <Bar dataKey="asian" stackId="a" fill="#84ced8"/>
-                    <Bar dataKey="hispanic" stackId="a" fill="#f47142"/>
-                    <Bar dataKey="other" stackId="a" fill="#bab6ae"/>
-                </BarChart>
-                <PieChart className={`inner-pie`} width={200} height={200}>
+                <SubjectView className={`inner-bar`} school={this.state.active[0]? this.state.active[0].school: ''}></SubjectView>
+                <PieChart className={`inner-pie`} width={350} height={350}>
                 <Pie
                 data={this.pieData(this.state.active)}
                 cx={100}
                 cy={100}
                 labelLine={false}
-                outerRadius={40}
+                outerRadius={100}
                 innerRadius={10}
                 paddingAngle={3}
                 fill="#8884d8"

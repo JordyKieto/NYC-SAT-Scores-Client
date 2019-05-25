@@ -83,6 +83,7 @@ class AggregateView extends React.Component {
                 margin={{
                     top: 20, right:20, bottom:20, left: 20
                 }}
+                className={`main-scatter`}
             >
                 <CartesianGrid />
                 <XAxis type="number" dataKey="x" name="Percentage of Students" unit="%">
