@@ -43,7 +43,7 @@ class DetailView extends React.Component {
     render() {
         return (
             <>
-                <SubjectView className={`inner-bar`} school={this.state.active[0]? this.state.active[0].school: ''}></SubjectView>
+                <SubjectView school={this.state.active[0]? this.state.active[0].school: ''}></SubjectView>
                 <PieChart className={`inner-pie`} width={350} height={350}>
                 <Pie
                 data={this.pieData(this.state.active)}

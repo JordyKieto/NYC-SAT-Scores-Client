@@ -44,10 +44,10 @@ class AggregateView extends React.Component {
     setActive(props){
         let index = props.payload[0].payload.index;
         let school = this.state.schools[index];
-        let black = +this.state.allScores.black[index].x;
-        let white = +this.state.allScores.white[index].x;
-        let asian = +this.state.allScores.asian[index].x;
-        let hispanic = +this.state.allScores.hispanic[index].x;
+        let black = this.state.allScores.black[index].x;
+        let white = this.state.allScores.white[index].x;
+        let asian = this.state.allScores.asian[index].x;
+        let hispanic = this.state.allScores.hispanic[index].x;
         let score = props.payload[0].payload.y;
         return {
                 school,
@@ -86,11 +86,11 @@ class AggregateView extends React.Component {
                 className={`main-scatter`}
             >
                 <CartesianGrid />
-                <XAxis type="number" dataKey="x" name="Percentage of Students" unit="%">
+                <XAxis type="number" dataKey="x" name="Percentage of Students" unit="%" domain={[0, 100]}>
                     <Label value="Percentage of Students" offset={-10} position="insideBottom" />
                 </XAxis>
-                <YAxis type="number" dataKey="y" name="Average Score (SAT Math)">
-                    <Label value="Average Score (SAT Math)" angle={-90} position="insideBottomLeft" />
+                <YAxis type="number" dataKey="y" name="Average SAT Score">
+                    <Label value="Average SAT Score" angle={-90} position="insideBottomLeft" />
                 </YAxis>
                 <Tooltip cursor={{ strokeDasharray: '3 3'}} content={this.renderTooltip.bind(this)} />
                 <Legend className={`race-legend`} verticalAlign="top" height={50} onClick={this.filterByRace.bind(this)}/>
