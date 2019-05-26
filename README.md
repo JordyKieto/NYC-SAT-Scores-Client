@@ -30,6 +30,6 @@
 * Recharts
 
 ## Future Updates
-* Detail View should display demographic pie chart initially
-* Detail View should show 3 bar charts of a particular schools SAT scores onClick
-* Create a regression model to predict SAT score from demographic makeup, and visualization
+* ~Detail View should display demographic pie chart initially~
+* ~Detail View should show 3 bar charts of a particular schools SAT scores onClick~
+* Detail View should show percentage for demographics, and score fraction for subject view

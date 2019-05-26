@@ -68,3 +68,22 @@ customToolTip{
   position: relative;
   top: 200px;
 }
+#root > div.recharts-wrapper.main-scatter {
+  margin-top: -38px;
+}
+#root > form > div > button.subject-picker {
+  width: 85px;
+  padding-right: 34px;
+  text-align: right;
+  margin-top: 18px;
+}
+
+button.subject-picker.math-pick.active {
+  background-color: #140d77 !important;
+}
+button.subject-picker.reading-pick.active {
+  background-color: #FFFF33 !important;
+}
+button.subject-picker.writing-pick.active {
+  background-color: #56912e !important;
+}

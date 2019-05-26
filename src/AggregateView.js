@@ -2,9 +2,13 @@ import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Lab
 import React from 'react';
 import DetailView from './DetailView';
 import RangeSlider from './RangeSlider';
-import Checkbox from './Checkbox';
+import SubjectPicker from './SubjectPicker';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
+import {
+    Navbar,
+    Nav,
+} from 'react-bootstrap'
 
 class AggregateView extends React.Component {
     constructor(props) {
@@ -76,7 +80,14 @@ class AggregateView extends React.Component {
     render() {
         return (
         <>
-            <h2 className={`graph-title`}>{`SAT Scores By Racial Makeup`}</h2>
+            <Navbar bg="light" expand="lg">
+                <Navbar.Brand href="#home">NYC SAT Scores By Racial Makeup</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>;
             <ScatterChart
                 width={650}
                 height={650}
@@ -106,7 +117,7 @@ class AggregateView extends React.Component {
                 ))}
             </ScatterChart>
             <RangeSlider scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
-           <Checkbox getScores={this.getScores.bind(this)}></Checkbox>
+           <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
         </>
         )
     }
