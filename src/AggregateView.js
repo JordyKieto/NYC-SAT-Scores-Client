@@ -2,6 +2,7 @@ import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Lab
 import React from 'react';
 import DetailView from './DetailView';
 import RangeSlider from './RangeSlider';
+import MatrixView from './MatrixView';
 import SubjectPicker from './SubjectPicker';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
@@ -118,6 +119,7 @@ class AggregateView extends React.Component {
             </ScatterChart>
             <RangeSlider scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
            <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
+           <MatrixView></MatrixView>
         </>
         )
     }

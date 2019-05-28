@@ -10,9 +10,9 @@ class SubjectPicker extends React.Component {
             subject: "Math"
         };
     };
-    handleChange(event){
-        this.setState({subject: event.target.value});
-        this.props.getScores(event.target.value);
+    handleChange({ target: { value } }){
+        this.setState({subject: value});
+        this.props.getScores(value);
     };
     render() {
         return (

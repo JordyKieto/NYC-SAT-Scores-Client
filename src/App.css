@@ -87,3 +87,11 @@ button.subject-picker.reading-pick.active {
 button.subject-picker.writing-pick.active {
   background-color: #56912e !important;
 }
+.matrix-chart{
+  position: relative;
+  top: -1276px;
+  left: 865px;
+}
+.matrix-chart > img{
+  height: 600px;
+}
