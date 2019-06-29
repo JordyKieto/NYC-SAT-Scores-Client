@@ -4,6 +4,7 @@ import DetailView from './DetailView';
 import RangeSlider from './RangeSlider';
 import MatrixView from './MatrixView';
 import SubjectPicker from './SubjectPicker';
+import SearchBar from './SearchBar';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
 import {
@@ -120,6 +121,7 @@ class AggregateView extends React.Component {
             <RangeSlider scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
            <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
            <MatrixView></MatrixView>
+           <SearchBar schools={this.state.schools}></SearchBar>
         </>
         )
     }
