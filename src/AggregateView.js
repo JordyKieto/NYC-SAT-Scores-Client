@@ -7,6 +7,8 @@ import SubjectPicker from './SubjectPicker';
 import SearchBar from './SearchBar';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
+import filterBySchool from './utils/filterBySchool';
+
 import {
     Navbar,
     Nav,
@@ -27,20 +29,30 @@ class AggregateView extends React.Component {
             },
             active: {},
             subject: 'Math',
-            score_range: [-Number.MAX_VALUE, Number.MAX_VALUE]
+            score_range: [-Number.MAX_VALUE, Number.MAX_VALUE],
+            active_school: ''
         }
     
     };
     async getScores(subject){
         let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
         res = await res.json();
+        let scoresByRange = filterByRange(res.scores, this.state.score_range);
         this.setState({
-            scores: filterByRange(res.scores, this.state.score_range),
+            scores: scoresByRange,
             schools: res.schools,
             allScores: res.scores,
             subject,
         });
-    }
+        if(this.state.active_school) this.schoolFilter(this.state.active_school);
+    };
+    schoolFilter(school){
+        let scoresBySchool = filterBySchool(this.state.allScores, this.state.schools.indexOf(school));
+        this.setState({
+            scores: scoresBySchool,
+            active_school: school
+        });
+    };
     componentWillMount() {
        this.getScores('Math');
     };
@@ -117,11 +129,11 @@ class AggregateView extends React.Component {
                         shape={<Dot r={5}/>}>
                     </Scatter>
                 ))}
-            </ScatterChart>
-            <RangeSlider scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
+           </ScatterChart>
+           <RangeSlider active_school={this.state.schools.indexOf(this.state.active_school)} schoolFilter={this.schoolFilter.bind(this)} scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
            <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
            <MatrixView></MatrixView>
-           <SearchBar schools={this.state.schools}></SearchBar>
+           <SearchBar schools={this.state.schools} schoolFilter={this.schoolFilter.bind(this)}></SearchBar>
         </>
         )
     }

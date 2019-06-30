@@ -101,3 +101,6 @@ button.subject-picker.writing-pick.active {
   top: 15px;
   left: 359px;
 }
+.autocomplete > div > input{
+  width: 300px;
+}

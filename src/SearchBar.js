@@ -30,7 +30,7 @@ class SearchBar extends React.Component{
                 shouldItemRender={matchTerm}
                 value={this.state.value}
                 onChange={(e) => this.setState({value: e.target.value})}
-                onSelect={(val) => this.setState({value: val})}
+                onSelect={(val) => {this.setState({value: val}); this.props.schoolFilter(val)}}
                 />
             </div>
             </>
