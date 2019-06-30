@@ -9,10 +9,10 @@ const Range = createSliderWithTooltip(Slider.Range);
 
 class RangeSlider extends React.Component{
     handle(score_range) {
-        let scoresByRange = filterByRange(this.props.scores, score_range);
-        let newScores = filterBySchool(scoresByRange, this.props.active_school);
+        let newScores = this.props.active_school !== -1? filterBySchool(this.props.scores, this.props.active_school): this.props.scores;
+        let scoresByRange = filterByRange(newScores, score_range);
         this.props.setAggState({
-                                scores: newScores,
+                                scores: scoresByRange,
                                 score_range,
         });
     };
