@@ -12,6 +12,10 @@ class SearchBar extends React.Component{
             schools: []
         }
     };
+    unsetActiveSchool(){
+        this.setState({value: ''});
+        this.props.unsetActiveSchool();
+    };
     componentWillReceiveProps({schools}){
         this.setState({schools});
     };
@@ -32,6 +36,7 @@ class SearchBar extends React.Component{
                 onChange={(e) => this.setState({value: e.target.value})}
                 onSelect={(val) => {this.setState({value: val}); this.props.schoolFilter(val)}}
                 />
+                <button onClick={this.unsetActiveSchool.bind(this)}></button>
             </div>
             </>
         )

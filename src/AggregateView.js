@@ -34,17 +34,25 @@ class AggregateView extends React.Component {
         }
     
     };
-    async getScores(subject){
-        let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
-        res = await res.json();
-        let scoresByRange = filterByRange(res.scores, this.state.score_range);
-        this.setState({
-            scores: scoresByRange,
-            schools: res.schools,
-            allScores: res.scores,
-            subject,
-        });
-        if(this.state.active_school) this.schoolFilter(this.state.active_school);
+    async getScores(subject, shouldFetch){
+        if(shouldFetch === false){
+            let scoresByRange = filterByRange(this.state.allScores, this.state.score_range);
+            this.setState({
+                scores: scoresByRange,
+            });
+        }
+        else{
+            let res = await fetch(`${process.env.REACT_APP_SAT_PROXY}scores?subject=${subject}`);
+            res = await res.json();
+            let scoresByRange = filterByRange(res.scores, this.state.score_range);
+            this.setState({
+                scores: scoresByRange,
+                schools: res.schools,
+                allScores: res.scores,
+                subject,
+            });
+            if(this.state.active_school) this.schoolFilter(this.state.active_school);
+        };
     };
     schoolFilter(school){
         let scoresBySchool = filterBySchool(this.state.allScores, this.state.schools.indexOf(school));
@@ -77,7 +85,10 @@ class AggregateView extends React.Component {
                 score,
         };
     };
-
+    async unsetActiveSchool(){
+        this.setState({active_school: ""});
+        await this.getScores(this.state.subject, false);
+    };
     renderTooltip(props) {
         if (props.active === true) {
             let active = this.setActive(props);
@@ -130,10 +141,17 @@ class AggregateView extends React.Component {
                     </Scatter>
                 ))}
            </ScatterChart>
-           <RangeSlider active_school={this.state.schools.indexOf(this.state.active_school)} schoolFilter={this.schoolFilter.bind(this)} scores={this.state.allScores} setAggState={this.setState.bind(this)}></RangeSlider>
+           <RangeSlider active_school={this.state.schools.indexOf(this.state.active_school)} 
+                        schoolFilter={this.schoolFilter.bind(this)} 
+                        scores={this.state.allScores}   
+                        setAggState={this.setState.bind(this)}>
+           </RangeSlider>
            <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
            <MatrixView></MatrixView>
-           <SearchBar schools={this.state.schools} schoolFilter={this.schoolFilter.bind(this)}></SearchBar>
+           <SearchBar   schools={this.state.schools} 
+                        schoolFilter={this.schoolFilter.bind(this)}
+                        unsetActiveSchool={this.unsetActiveSchool.bind(this)}>
+           </SearchBar>
         </>
         )
     }
