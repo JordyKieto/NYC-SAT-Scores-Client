@@ -7,8 +7,9 @@ import filterBySchool from './utils/filterBySchool';
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
 const Range = createSliderWithTooltip(Slider.Range);
 
-class RangeSlider extends React.Component{
+class ScoreSlider extends React.Component{
     handle(score_range) {
+        debugger
         let newScores = this.props.active_school !== -1? filterBySchool(this.props.scores, this.props.active_school): this.props.scores;
         let scoresByRange = filterByRange(newScores, score_range);
         this.props.setAggState({
@@ -34,4 +35,4 @@ class RangeSlider extends React.Component{
         )
     }
 }
-export default RangeSlider;
+export default ScoreSlider;

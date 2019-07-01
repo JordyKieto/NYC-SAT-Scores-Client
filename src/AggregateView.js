@@ -1,7 +1,7 @@
 import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label, Dot} from 'recharts';
 import React from 'react';
 import DetailView from './DetailView';
-import RangeSlider from './RangeSlider';
+import ScoreSlider from './ScoreSlider';
 import MatrixView from './MatrixView';
 import SubjectPicker from './SubjectPicker';
 import SearchBar from './SearchBar';
@@ -91,13 +91,12 @@ class AggregateView extends React.Component {
     };
     renderTooltip(props) {
         if (props.active === true) {
-            let active = this.setActive(props);
             return (
                 <div className="customToolTip">
                     <b>{this.state.schools[props.payload[0].payload.index]}</b><br></br>
                     <>Percentage of students {props.payload[0].value}%</><br></br>
                     <>SAT Score {props.payload[1].value}</>
-                    <DetailView active={active}/>
+                    <DetailView active={this.setActive(props)}/>
                 </div>
                )
         }
@@ -109,27 +108,50 @@ class AggregateView extends React.Component {
                 <Navbar.Brand href="#home">NYC SAT Scores By Racial Makeup</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
-                    </Nav>
+                    <Nav className="mr-auto"></Nav>
                 </Navbar.Collapse>
             </Navbar>;
             <ScatterChart
-                width={650}
-                height={650}
-                margin={{
-                    top: 20, right:20, bottom:20, left: 20
-                }}
-                className={`main-scatter`}
+                    width={650}
+                    height={650}
+                    margin={{
+                        top: 20, right:20, bottom:20, left: 20
+                    }}
+                    className={`main-scatter`}
             >
                 <CartesianGrid />
-                <XAxis type="number" dataKey="x" name="Percentage of Students" unit="%" domain={[0, 100]}>
-                    <Label value="Percentage of Students" offset={-10} position="insideBottom" />
+                <XAxis 
+                        type="number" 
+                        dataKey="x" 
+                        name="Percentage of Students" 
+                        unit="%" domain={[0, 100]}
+                >
+                        <Label 
+                                value="Percentage of Students" 
+                                offset={-10} 
+                                position="insideBottom" 
+                        />
                 </XAxis>
-                <YAxis type="number" dataKey="y" name="Average SAT Score">
-                    <Label value="Average SAT Score" angle={-90} position="insideBottomLeft" />
+                <YAxis 
+                        type="number" 
+                        dataKey="y" 
+                        name="Average SAT Score"
+                >
+                        <Label 
+                                value="Average SAT Score" 
+                                angle={-90} 
+                                position="insideBottomLeft" 
+                        />
                 </YAxis>
-                <Tooltip cursor={{ strokeDasharray: '3 3'}} content={this.renderTooltip.bind(this)} />
-                <Legend className={`race-legend`} verticalAlign="top" height={50} onClick={this.filterByRace.bind(this)}/>
+                <Tooltip    
+                        cursor={{ strokeDasharray: '3 3'}} 
+                        content={this.renderTooltip.bind(this)} 
+                />
+                <Legend className={`race-legend`} 
+                        verticalAlign="top" 
+                        height={50} 
+                        onClick={this.filterByRace.bind(this)}
+                />
                 {races.map(([race, color])=>(
                     <Scatter
                         key={race}
@@ -137,16 +159,18 @@ class AggregateView extends React.Component {
                         data={this.state.scores[race]} 
                         fill={color}
                         className={this.state.show[race]? "": "hidden"} 
-                        shape={<Dot r={5}/>}>
+                        shape={<Dot r={this.state.active_school? 10: 5}/>}>
                     </Scatter>
                 ))}
            </ScatterChart>
-           <RangeSlider active_school={this.state.schools.indexOf(this.state.active_school)} 
+           <ScoreSlider active_school={this.state.schools.indexOf(this.state.active_school)} 
                         schoolFilter={this.schoolFilter.bind(this)} 
                         scores={this.state.allScores}   
                         setAggState={this.setState.bind(this)}>
-           </RangeSlider>
-           <SubjectPicker getScores={this.getScores.bind(this)}></SubjectPicker>
+           </ScoreSlider>
+           <SubjectPicker 
+                        getScores={this.getScores.bind(this)}>
+           </SubjectPicker>
            <MatrixView></MatrixView>
            <SearchBar   schools={this.state.schools} 
                         schoolFilter={this.schoolFilter.bind(this)}
