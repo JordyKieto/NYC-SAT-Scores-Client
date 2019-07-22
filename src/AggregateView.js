@@ -172,7 +172,7 @@ class AggregateView extends React.Component {
                         getScores={this.getScores.bind(this)}>
            </SubjectPicker>
            <MatrixView></MatrixView>
-           <SearchBar   schools={this.state.schools} 
+           <SearchBar   schools={[...this.state.schools]} 
                         schoolFilter={this.schoolFilter.bind(this)}
                         unsetActiveSchool={this.unsetActiveSchool.bind(this)}>
            </SearchBar>
