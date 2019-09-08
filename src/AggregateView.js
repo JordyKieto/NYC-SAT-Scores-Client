@@ -8,6 +8,7 @@ import SearchBar from './SearchBar';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
 import filterBySchool from './utils/filterBySchool';
+import PredictForm from "./PredictForm";
 
 import {
     Navbar,
@@ -176,6 +177,9 @@ class AggregateView extends React.Component {
                         schoolFilter={this.schoolFilter.bind(this)}
                         unsetActiveSchool={this.unsetActiveSchool.bind(this)}>
            </SearchBar>
+           <PredictForm>
+               
+           </PredictForm>
         </>
         )
     }
