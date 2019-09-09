@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
-import AggregateView from './AggregateView';
+import MainNav from './MainNav';
+import Routing from './router'
 
 function App() {
   return (
-    <AggregateView/>
+    <>
+      <MainNav/>
+      <Routing/>
+    </>
   );
 }
 

@@ -4,14 +4,18 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.0.0-rc.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0",
+    "babel-core": "^6.26.3",
+    "chai": "^4.2.0",
+    "enzyme": "^3.10.0",
+    "mocha": "^6.2.0",
     "rc-slider": "^8.6.11",
     "rc-tooltip": "^3.7.3",
-    "recharts": "^1.6.2",
+    "react": "^16.8.6",
+    "react-autocomplete": "^1.8.1",
     "react-bootstrap": "^1.0.0-beta.8",
-    "react-autocomplete": "^1.8.1"
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.0",
+    "recharts": "^1.6.2"
   },
   "engines": {
     "node": "10.15.3",
@@ -20,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha test --require @babel/register",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm install && npm run build"
   },
@@ -40,11 +44,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/register": "^7.5.5",
     "@material-ui/lab": "^4.0.0-alpha.13",
     "bootstrap": "^4.3.1",
     "rc-slider": "^8.6.11",
     "rc-tooltip": "^3.7.3",
     "react-autocomplete": "^1.8.1",
+    "react-router-dom": "^5.0.1",
     "recharts": "^1.6.2"
   }
 }

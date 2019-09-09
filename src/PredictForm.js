@@ -1,5 +1,6 @@
 import React from 'react';
 import races from './jsCommon/races';
+import boroughs from './jsCommon/boroughs';
 
 class PredictForm extends React.Component{
     constructor(){
@@ -32,13 +33,12 @@ class PredictForm extends React.Component{
     };
     set_borough(event){
         let new_borough = event.target.value
-        let new_state = ['Manhattan', 'Staten', 'Queens', 'Bronx', 'Brooklyn'].map((borough)=>{
+        let new_state = boroughs.map((borough)=>{
             let value = borough === new_borough? 1: 0
             return [borough, value]
         });
         new_state.push(['borough', new_borough])
-        new_state = Object.fromEntries(new_state)
-        this.setState(new_state)
+        this.setState(Object.fromEntries(new_state))
     };
     async get_prediction(){
         let {url, score, borough, ...params} = this.state
@@ -57,12 +57,18 @@ class PredictForm extends React.Component{
             <>
             <div>
                 <form>
+                    <button className="btn btn-danger" type="button" aria-haspopup="true" aria-expanded="false">{this.state.score}</button>
                     {races.map(([race])=>{
                         race = race.charAt(0).toUpperCase() + race.slice(1)
                         return (
                         <div className="form-group" key={race+"_key"}>
                             <label htmlFor={race + "_input_predict"}>{"Percent " + race }</label>
-                            <input type="number" onChange={this.set_field.bind(this)} className="form-control race_predict_input" id={race + "_input_predict"} placeholder="20"></input>
+                            <input  type="number" 
+                                    onChange={this.set_field.bind(this)} 
+                                    className="form-control race_predict_input" 
+                                    id={race + "_input_predict"} 
+                                    placeholder="20">
+                            </input>
                         </div> 
                         )
                     })}
@@ -70,7 +76,13 @@ class PredictForm extends React.Component{
                         return (
                         <div className="form-group"  key={field+"_key"}>
                             <label htmlFor={field + "_input_predict"}>{field}</label>
-                            <input type="number" onChange={this.set_field.bind(this)} className="form-control race_predict_input" id={field + "_input_predict"} placeholder="1000"></input>
+                            <input 
+                                    type="number" 
+                                    onChange={this.set_field.bind(this)} 
+                                    className="form-control race_predict_input" 
+                                    id={field + "_input_predict"} 
+                                    placeholder="1000">
+                            </input>
                         </div> 
                         )
                     })}
@@ -78,15 +90,18 @@ class PredictForm extends React.Component{
                     {this.state.borough}
                     </button>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        {['Manhattan', 'Staten', 'Queens', 'Bronx', 'Brooklyn'].map((borough)=>{
-                           return( <button type="button"  key={borough+"_key"}onClick={this.set_borough.bind(this)} className="dropdown-item" value={borough}>{borough}</button>)
+                        {boroughs.map((borough)=>{
+                           return(  <button  type="button"  
+                                            key={borough+"_key"}
+                                            onClick={this.set_borough.bind(this)} 
+                                            className="dropdown-item" 
+                                            value={borough}>{borough}
+                                    </button>
+                            )
                         })}
                     </div>
                     <button className="btn btn-info" onClick={this.get_prediction.bind(this)} type="button" aria-haspopup="true" aria-expanded="false">
                     Submit
-                    </button>
-                    <button className="btn btn-danger" type="button" aria-haspopup="true" aria-expanded="false">
-                    {this.state.score}
                     </button>
                 </form>
             </div>

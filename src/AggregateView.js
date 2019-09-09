@@ -2,18 +2,11 @@ import {ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Lab
 import React from 'react';
 import DetailView from './DetailView';
 import ScoreSlider from './ScoreSlider';
-import MatrixView from './MatrixView';
 import SubjectPicker from './SubjectPicker';
 import SearchBar from './SearchBar';
 import races from './jsCommon/races';
 import filterByRange from './utils/filterByRange';
 import filterBySchool from './utils/filterBySchool';
-import PredictForm from "./PredictForm";
-
-import {
-    Navbar,
-    Nav,
-} from 'react-bootstrap'
 
 class AggregateView extends React.Component {
     constructor(props) {
@@ -105,13 +98,6 @@ class AggregateView extends React.Component {
     render() {
         return (
         <>
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand href="#home">NYC SAT Scores By Racial Makeup</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto"></Nav>
-                </Navbar.Collapse>
-            </Navbar>;
             <ScatterChart
                     width={650}
                     height={650}
@@ -172,14 +158,10 @@ class AggregateView extends React.Component {
            <SubjectPicker 
                         getScores={this.getScores.bind(this)}>
            </SubjectPicker>
-           <MatrixView></MatrixView>
            <SearchBar   schools={[...this.state.schools]} 
                         schoolFilter={this.schoolFilter.bind(this)}
                         unsetActiveSchool={this.unsetActiveSchool.bind(this)}>
            </SearchBar>
-           <PredictForm>
-               
-           </PredictForm>
         </>
         )
     }

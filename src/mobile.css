@@ -1,0 +1,8 @@
+@media only screen and (max-width: 768px){
+    .main-scatter > .recharts-surface{
+        width: 95%;
+    }
+    .recharts-legend-wrapper{
+        left: -114px !important;
+    }
+}
