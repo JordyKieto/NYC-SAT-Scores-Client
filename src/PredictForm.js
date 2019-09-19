@@ -21,7 +21,10 @@ class PredictForm extends React.Component{
             'Bronx': 0,
             'Queens': 0,
             'Brooklyn': 0,
-            'variance': 1
+            'Math': 1,
+            'Reading': 0,
+            "Writing": 0,
+            "subject": 'Math'
         }
     };
     validate_demographics(params){
@@ -51,6 +54,15 @@ class PredictForm extends React.Component{
         else{
             alert('Your demograpic percentages must sum up to 100%')
         }
+    };
+    set_subject(event){
+        let new_subject = event.target.value
+        let new_state = ['Math', 'Reading', 'Writing'].map((sub)=>{
+            let value = sub === new_subject? 1: 0
+            return [sub, value]
+        });
+        new_state.push(['subject', new_subject])
+        this.setState(Object.fromEntries(new_state))
     };
     render() {
         return (
@@ -86,6 +98,20 @@ class PredictForm extends React.Component{
                         </div> 
                         )
                     })}
+                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {this.state.subject}
+                    </button>
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {['Math', 'Reading', 'Writing'].map((subject)=>{
+                           return(  <button  type="button"  
+                                            key={subject+"_key"}
+                                            onClick={this.set_subject.bind(this)} 
+                                            className="dropdown-item" 
+                                            value={subject}>{subject}
+                                    </button>
+                            )
+                        })}
+                    </div>
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {this.state.borough}
                     </button>
