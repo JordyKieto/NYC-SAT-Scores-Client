@@ -1,0 +1,1 @@
+REACT_APP_SAT_PROXY=http://localhost:5000/ npm start
