@@ -98,33 +98,39 @@ class PredictForm extends React.Component{
                         </div> 
                         )
                     })}
-                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {this.state.subject}
-                    </button>
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        {['Math', 'Reading', 'Writing'].map((subject)=>{
-                           return(  <button  type="button"  
-                                            key={subject+"_key"}
-                                            onClick={this.set_subject.bind(this)} 
-                                            className="dropdown-item" 
-                                            value={subject}>{subject}
-                                    </button>
-                            )
-                        })}
-                    </div>
+                    <div className="btn-group">
+
                     <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {this.state.borough}
                     </button>
-                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        {boroughs.map((borough)=>{
-                           return(  <button  type="button"  
-                                            key={borough+"_key"}
-                                            onClick={this.set_borough.bind(this)} 
-                                            className="dropdown-item" 
-                                            value={borough}>{borough}
-                                    </button>
-                            )
-                        })}
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            {boroughs.map((borough)=>{
+                            return(  <button  type="button"  
+                                                key={borough+"_key"}
+                                                onClick={this.set_borough.bind(this)} 
+                                                className="dropdown-item" 
+                                                value={borough}>{borough}
+                                        </button>
+                                )
+                            })}
+                        </div>
+                    </div>
+                  
+                    <div className="btn-group">
+                    <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonSubject" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {this.state.subject}
+                    </button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButtonSubject">
+                            {['Math', 'Reading', 'Writing'].map((subject)=>{
+                            return(  <button  type="button"  
+                                                key={subject+"_key"}
+                                                onClick={this.set_subject.bind(this)} 
+                                                className="dropdown-item" 
+                                                value={subject}>{subject}
+                                        </button>
+                                )
+                            })}
+                        </div>
                     </div>
                     <button className="btn btn-info" onClick={this.get_prediction.bind(this)} type="button" aria-haspopup="true" aria-expanded="false">
                     Submit
