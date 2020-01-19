@@ -6,7 +6,7 @@ class PredictForm extends React.Component{
     constructor(){
         super();
         this.state = {
-            url: new URL("http://127.0.0.1:5000/predict"),
+            url: new URL(`${process.env.REACT_APP_SAT_PROXY}predict`),
             score: 617,
             borough: 'Manhattan',
             'Percent Black': 20,
