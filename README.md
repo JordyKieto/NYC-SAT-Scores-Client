@@ -34,3 +34,9 @@
     (specifically bug where index of plot objects dosen't match total plotPoints in setActive)
 * Implement Correlation Matrix -> https://bl.ocks.org/HarryStevens/302d078a089caf5aeb13e480b86fdaeb
 * Detail View should show percentage for demographics, and score fraction for subject view
+
+## Screenshots
+<p align="center">
+  <img src="001.png" width="350" title="hover text">
+  <img src="003.png" width="350" title="hover text">
+</p>
